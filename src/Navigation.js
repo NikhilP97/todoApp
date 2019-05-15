@@ -7,26 +7,31 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import LogOut from './LogOut';
+import Navbar from "./Navbar";
+import Background from './bg_white.png';
+
+var sectionStyle = {
+    
+    backgroundImage: "url(" + ( Background ) + ")"
+};
 
 class Navigation extends Component {
   render() {
     return (
+      
+      <div className="App" style = {{ backgroundImage: 'url(' + Background + ')', 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'repeat',
+                backgroundAttachment: 'fixed'
+              }}>
       <Router>
+
         <div>
           <Row>
             <Column>
+              <Navbar authenticated={this.props.authenticated}/>
               
-              {this.props.authenticated ? (
-                <span>
-                  <NavLink to="/dashboard" params={this.props.authenticated }>My todo's</NavLink>
-                  <LogOut />
-                </span>
-              ) : (
-                <span>
-                  <NavLink to="/login">Login</NavLink>
-                  <NavLink to="/register">Register</NavLink>
-                </span>
-              )}
             </Column>
           </Row>
 
@@ -38,11 +43,31 @@ class Navigation extends Component {
           </Switch>
         </div>
       </Router>
+      </div>
     );
   }
 }
 
 export default Navigation;
+
+/*
+
+
+{this.props.authenticated ? (
+                <span>
+                  <NavLink to="/dashboard" params={this.props.authenticated }>My todo's</NavLink>
+                  <LogOut />
+                </span>
+              ) : (
+                <span>
+                  <NavLink to="/login">Login</NavLink>
+                  <NavLink to="/register">Register</NavLink>
+                </span>
+              )}
+
+
+
+*/
 
 
 

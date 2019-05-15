@@ -20,18 +20,28 @@ class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
+    
+    const {firstname, lastname, email, password } = this.state;
 
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.props.history.push('/dashboard');
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(
+        (data) => {
+      // here you ned to deconstruct user
+      const { user } = data
+      if (user) {
+            user.updateProfile({
+               displayName: firstname,
+            }).then(
+              (s)=> this.props.history.push('/dashboard')
+            )
+          }
       })
-      .catch((error) => {
-        this.setState({ error: error });
-      });
+      .catch(e => {
+        console.log(e)
+      })
+
   };
+  
   render() {
     const { email, password, error } = this.state;
     return (
@@ -122,6 +132,18 @@ export default withRouter(Register);
 
 
 /*
+
+firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.props.history.push('/dashboard');
+      })
+      .catch((error) => {
+        this.setState({ error: error });
+      });
+
+
 <Container>
         <Flex>
           <Box>
@@ -163,5 +185,31 @@ export default withRouter(Register);
           </Box>
         </Flex>
       </Container>
+
+
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(
+      (user)=>{
+        if(this.user){
+          this.user.updateProfile({
+             displayName: "Nikhil",
+             
+          }).then(
+           this.props.history.push('/dashboard')
+          )
+        } else {
+          console.log("user after signing up", user);
+          this.props.history.push('/dashboard')
+        }
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log("error occured while signing up!", error);
+      this.setState({ error: error.message });
+      // ...
+    });
 
 */

@@ -2,10 +2,41 @@
   outline: none;
 }
 
-body {
+// Full page responsive background image
+img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.App {
+    height: 100%;
+    background-image: url(bg_white.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed
+}
+
+
+body, html {
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-position: center;
+  background-image: url(bg_white.png);
+  background-attachment: fixed;
 }
 
 

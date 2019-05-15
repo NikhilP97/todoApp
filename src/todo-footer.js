@@ -25,3 +25,9 @@ const TodoFooter = props => (
 );
 
 export default TodoFooter;
+
+/*
+
+<TodoFAQ />
+
+*/

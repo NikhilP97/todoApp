@@ -10,13 +10,21 @@ const logOutUser = () => {
 const LogOut = () => {
 	
   return(
-  	<NavLink
-  	to="/login"
-  	className="btn waves-effect waves-light right"
-   	onClick={logOutUser} children="Log Out"
+
+    <NavLink
+      to="/login"
+      style={{
+      width: "120px",
+      borderRadius: "3px",
+      letterSpacing: "1.5px",
+      margin: "0.8rem"
+      }}
+      className="btn btn-medium right waves-effect waves-light hoverable red accent-3"
+      onClick={logOutUser} children="Log Out"
     >
-    LogOut
+      LogOut
     </NavLink>
+  	
     
 
 
@@ -24,3 +32,14 @@ const LogOut = () => {
 };
 
 export default LogOut;
+
+/*
+<NavLink
+    to="/login"
+    className="btn waves-effect waves-light right"
+    onClick={logOutUser} children="Log Out"
+    >
+    LogOut
+    </NavLink>
+
+*/
