@@ -1,18 +1,15 @@
 import React from 'react';
-import { Button } from 'rebass';
 import firebase from 'firebase';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 const logOutUser = () => {
-	
-  	firebase.auth().signOut();
+  firebase.auth().signOut();
 };
 
 const LogOut = () => {
-	
+  
   return(
-
     <NavLink
-      to="/login"
+      to="/"
       style={{
       width: "120px",
       borderRadius: "3px",
@@ -24,22 +21,7 @@ const LogOut = () => {
     >
       LogOut
     </NavLink>
-  	
-    
-
-
-  	) 
+  ) 
 };
 
 export default LogOut;
-
-/*
-<NavLink
-    to="/login"
-    className="btn waves-effect waves-light right"
-    onClick={logOutUser} children="Log Out"
-    >
-    LogOut
-    </NavLink>
-
-*/

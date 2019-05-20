@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Flex, Box, Heading } from 'rebass';
 import TodoList from './todo-list'; 
 const Dashboard = (params) => {
 	console.log("Dashboard params: ", params);
-	console.log("Dashboard props: ", this.props);
+	// console.log("Dashboard props: ", this.props);
   return (
   	
     <div className="todo-app ">
@@ -13,7 +12,6 @@ const Dashboard = (params) => {
 	      <p className="flow-text grey-text text-darken-1">
 	        Here are you're list of Todo's. 
 	      </p>
-	      
 	    </h4>
 	    </div>
         <TodoList
@@ -24,9 +22,3 @@ const Dashboard = (params) => {
 };
 
 export default Dashboard;
-
-/*
-
-<div className="flow-text grey-text text-darken-1"> Double Click to edit them. </div>
-
-*/

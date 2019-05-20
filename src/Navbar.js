@@ -31,9 +31,9 @@ class Navbar extends Component {
                   <NavLink
                     to="/login"
                     style={{
-                    width: "120px",
+                    width: "100px",
                     borderRadius: "3px",
-                    letterSpacing: "1.5px",
+                    letterSpacing: "0.5px",
                     margin: "0.8rem"
                     }}
                     className="btn btn-medium left waves-effect waves-light hoverable blue accent-3"
@@ -61,7 +61,7 @@ class Navbar extends Component {
               }}
               className="col s5 brand-logo center white-text"
             >
-              <i className="material-icons">edit</i>
+              <i className="material-icons">playlist_add_check</i>
               Qtodo
             </NavLink>
           </div>
@@ -72,10 +72,3 @@ class Navbar extends Component {
 }
 
 export default Navbar;
-
-
-/*
-
-<NavLink to="/dashboard" params={this.props.authenticated }>My todo's</NavLink>
-
-*/

@@ -2,7 +2,6 @@ import { Icon, Col } from 'react-materialize';
 import React from 'react';
 import TodoEdit from './todo-edit';
 
-
 const TodoListItem = (props) => {
   const {
     checked, handleCheck, handleDelete, edit, handleDoubleClick, id,
@@ -12,17 +11,19 @@ const TodoListItem = (props) => {
 
   if (!edit) {
     return (
-      <Col m={12} s={12}>
+      <Col m={12} s={12} >
         <div className={`${'card-panel teal lighten-2 yellow-text '}${checkedClass}`}>
-          <span onDoubleClick={() => handleDoubleClick(id)}>
-            {props.title}
-          </span>
+
           <span onClick={() => handleCheck(id, checked)} >
 
             <Icon className="right todo-checkbox" children={checkedString} />
           </span>
           <span onClick={() => handleDelete(id)}>
             <Icon className="right todo-checkbox" children="delete" />
+          </span>
+          <span onClick={() => handleDoubleClick(id)}>
+            <Icon className="right todo-checkbox" children="edit" />
+            {props.title}
           </span>
 
         </div>

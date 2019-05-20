@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default class TodoEdit extends React.Component {
     state = {
       value: this.props.title,
@@ -12,7 +11,6 @@ export default class TodoEdit extends React.Component {
       input.focus();
       input.setSelectionRange(length, length);
     }
-
 
     render() {
       return (

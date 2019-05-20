@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Container, Flex, Box, Input, Button, Subhead, Text } from 'rebass';
 import firebase from './firebase';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
-import classnames from "classnames";
 
 class Login extends Component {
   state = {
     email: '',
     password: '',
     error: {},
+    emailError: null,
+    pawdError: null,
   };
 
   handleInputChange = (event) => {
@@ -18,13 +18,30 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    let fieldNotFilled = false;
+
+    if(this.state.email === ''){
+      this.setState({ emailError: "Please Enter a valid Email ID" });
+      fieldNotFilled = true;
+    }
+
+    if(this.state.password === ''){
+      this.setState({ pawdError: "Please Enter 6 character long password" });
+      fieldNotFilled = true;
+    }
+
+    if(fieldNotFilled){
+      return;
+    }
+
     const { email, password } = this.state;
 
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.props.history.push('/dashboard');
+        this.props.history.push('/');
       })
       .catch((error) => {
         this.setState({ error: error });
@@ -58,6 +75,12 @@ class Login extends Component {
                 />
                 <label htmlFor="email">Email</label>
               </div>
+              <div>
+                <span className="red-text">
+                  {this.state.emailError}
+              </span>
+              </div>
+
               <div className="input-field col s12">
                 <input
                   type="password"
@@ -67,6 +90,11 @@ class Login extends Component {
                   onChange={this.handleInputChange}
                 />
                 <label htmlFor="password">Password</label>
+                <div>
+                  <span className="red-text">
+                    {this.state.pawdError}
+                 </span>
+                </div>
                 <span className="red-text">
                   {error.message}
                 </span>
@@ -95,48 +123,3 @@ class Login extends Component {
 }
 
 export default withRouter(Login);
-
-
-/*
-<Container>
-        <Flex>
-          <Box>
-            <Subhead>Log In</Subhead>
-          </Box>
-        </Flex>
-        {error ? (
-          <Flex>
-            <Box>
-              <Text>{error.message}</Text>
-            </Box>
-          </Flex>
-        ) : null}
-        <Flex>
-          <Box>
-            <form onSubmit={this.handleSubmit}>
-              <Input
-                type="text"
-                name="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={this.handleInputChange}
-              />
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.handleInputChange}
-              />
-              <NavLink
-                to="/dashboard"
-                className="btn waves-effect waves-light left"
-                onClick={this.handleSubmit} children="Log In"
-              >
-                Login
-              </NavLink>
-            </form>
-          </Box>
-        </Flex>
-      </Container>
-*/

@@ -1,7 +1,5 @@
 import React from 'react';
 import firebase from './firebase';
-// import { fire, facebookProvider } from '../fire';
-
 
 export default class TodoHeader extends React.Component {
     state = {
@@ -18,7 +16,6 @@ export default class TodoHeader extends React.Component {
         alert('please enter a title');
         return;
       }
-
 
       const todo = {
         title,

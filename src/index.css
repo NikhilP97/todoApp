@@ -28,6 +28,10 @@ img.bg {
     background-attachment: fixed
 }
 
+.renderingTodos {
+  padding: 10px;
+}
+
 
 body, html {
   height: 100%;

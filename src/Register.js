@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Container, Flex, Box, Input, Button, Subhead, Text } from 'rebass';
 import firebase from './firebase';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 
@@ -12,6 +11,10 @@ class Register extends Component {
     email: '',
     password: '',
     error: {},
+    firstNameError: null,
+    lastNameError: null,
+    emailError: null,
+    pawdError: null
   };
 
   handleInputChange = (event) => {
@@ -20,6 +23,31 @@ class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    let fieldNotFilled = false;
+
+    if(this.state.firstname === ''){
+    	this.setState({ firstNameError: "Please Enter your First Name" });
+    	fieldNotFilled = true;
+    }
+
+    if(this.state.lastname === ''){
+    	this.setState({ lastNameError: "Please Enter your Last Name" });
+    	fieldNotFilled = true;
+    }
+
+    if(this.state.email === ''){
+    	this.setState({ emailError: "Please Enter a valid Email ID" });
+    	fieldNotFilled = true;
+    }
+
+    if(this.state.password === ''){
+    	this.setState({ pawdError: "Please Enter 6 character long password" });
+    	fieldNotFilled = true;
+    }
+
+    if(fieldNotFilled){
+    	return;
+    }
     
     const {firstname, lastname, email, password } = this.state;
 
@@ -32,13 +60,14 @@ class Register extends Component {
             user.updateProfile({
                displayName: firstname,
             }).then(
-              (s)=> this.props.history.push('/dashboard')
+              (s)=> this.props.history.push('/')
             )
           }
       })
-      .catch(e => {
-        console.log(e)
-      })
+      .catch((error) => {
+      	console.log("register error: ", error);
+        this.setState({ error: error });
+      });
 
   };
   
@@ -72,6 +101,11 @@ class Register extends Component {
                 />
                 <label htmlFor="email">First Name</label>
               </div>
+              <div>
+	              <span className="red-text">
+	                  {this.state.firstNameError}
+	               </span>
+	          </div>
               <div className="input-field col s12">
                 <input
                   type="text"
@@ -82,6 +116,12 @@ class Register extends Component {
                 />
                 <label htmlFor="email">Last Name</label>
               </div>
+              <div>
+              	<span className="red-text">
+                  {this.state.lastNameError}
+               </span>
+              </div>
+              
               <div className="input-field col s12">
                 <input
                   type="text"
@@ -92,6 +132,12 @@ class Register extends Component {
                 />
                 <label htmlFor="email">Email</label>
               </div>
+              <div>
+              	<span className="red-text">
+                  {this.state.emailError}
+              </span>
+              </div>
+              
               <div className="input-field col s12">
                 <input
                   type="password"
@@ -101,6 +147,11 @@ class Register extends Component {
                   onChange={this.handleInputChange}
                 />
                 <label htmlFor="password">Password</label>
+                <div>
+                	<span className="red-text">
+	                  {this.state.pawdError}
+	               </span>
+                </div>
                 <span className="red-text">
                   {error.message}
                 </span>
@@ -131,85 +182,4 @@ class Register extends Component {
 export default withRouter(Register);
 
 
-/*
 
-firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.props.history.push('/dashboard');
-      })
-      .catch((error) => {
-        this.setState({ error: error });
-      });
-
-
-<Container>
-        <Flex>
-          <Box>
-            <Subhead>Register</Subhead>
-          </Box>
-        </Flex>
-        {error ? (
-          <Flex>
-            <Box>
-              <Text>{error.message}</Text>
-            </Box>
-          </Flex>
-        ) : null}
-        <Flex>
-          <Box>
-            <form onSubmit={this.handleSubmit}>
-              <Input 
-                type="text" 
-                name="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={this.handleInputChange} 
-              />
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.handleInputChange}
-              />
-              <NavLink
-                to="/dashboard"
-                className="btn waves-effect waves-light left"
-                onClick={this.handleSubmit} children="Register"
-              >
-                Register
-              </NavLink>
-            </form>
-          </Box>
-        </Flex>
-      </Container>
-
-
-
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(
-      (user)=>{
-        if(this.user){
-          this.user.updateProfile({
-             displayName: "Nikhil",
-             
-          }).then(
-           this.props.history.push('/dashboard')
-          )
-        } else {
-          console.log("user after signing up", user);
-          this.props.history.push('/dashboard')
-        }
-    })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log("error occured while signing up!", error);
-      this.setState({ error: error.message });
-      // ...
-    });
-
-*/

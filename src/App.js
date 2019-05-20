@@ -7,6 +7,7 @@ class App extends Component {
     authenticated: null,
     user: null,
   };
+
   componentDidMount() {
     console.log(this.state.authenticated);
     firebase.auth().onAuthStateChanged((authenticated) => {
@@ -21,8 +22,11 @@ class App extends Component {
       console.log(this.state.authenticated);
     });
   }
+  
   render() {
-    return <Navigation authenticated={this.state.authenticated} user={this.state.user} />;
+    return(
+        <Navigation authenticated={this.state.authenticated} user={this.state.user} />    
+      ) 
   }
 }
 
