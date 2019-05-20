@@ -1,4 +1,4 @@
-#Qtodo - Todo App
+# Qtodo - Todo App
 
 Simple Todo App built using React and Firebase.
 It lets the user Login / Register. 
