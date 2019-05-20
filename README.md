@@ -1,3 +1,5 @@
+#Qtodo - Todo App
+
 Simple Todo App built using React and Firebase.
 It lets the user Login / Register. 
 The user can Add, Delete, Modify & Check Todo's.
