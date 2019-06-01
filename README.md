@@ -1,6 +1,6 @@
 # Qtodo - Todo App
 
-Simple Todo App built using React and Firebase.
+Simple Todo App built using React and Firebase
 It lets the user Login / Register. 
 The user can Add, Delete, Modify & Check Todo's.
 One user will not be able to see and access another user’s tasks, Proper session maintained.
